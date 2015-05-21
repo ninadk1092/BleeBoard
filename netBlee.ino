@@ -7,76 +7,6 @@ int flag=0;
 int led=0;
 int recvCount=0;
 
-void setup()  
-{
-  Serial.begin(9600);
-  wifiPort.begin(9600);
-  wifiPort.println("AT+RST");
-  delay(1000);
-  wifiPort.println("AT");
-  digitalWrite(3,LOW);
-    digitalWrite(2,LOW);
-  recvCount=0;
-  connectWifi();
-  
-}
-
-void loop() 
-{
-  String str = "";
-  int len,i;
-  
-  wifiPort.listen();
-  delay(500);     //wait 1000ms for all serial data to arrive
-  len = wifiPort.available() ;
-  
-  for(i=0;i<len;i++) {
-    
-    str += char(wifiPort.read());
-   // Serial.println(str);
-  }
-  if(str!="")
-    Serial.println(str);
-    
-    for(flag=0,i=0;i<len;i++)
-    {
-        if(str[i] == ':')
-         {
-         flag=1;
-        continue;
-          }
-      
-      if(flag==1 && str[i] == 't')
-      {
-          toggleLed();
-          Serial.println("t received");
-          recvCount++;
-          break;
-    }
-    
-      if(flag==1 && str[i] == 'p')
-      {
-          playSeq();
-          Serial.println("p received");
-          recvCount++;
-          break;
-    }
-    
-    }
-/*
-  if (Serial.available() ){
-    wifiPort.write(Serial.read());
-  }*/
-   // Serial.flush();
-    wifiPort.flush();
-    
-    if(recvCount>2){
-    resetConn();
-        recvCount=0;
-
-    }
-}
-
 String sendData(String cmd, int wait){
   
   String response= "";
@@ -147,3 +77,75 @@ void playSeq(){
     digitalWrite(4,LOW);
     delay(500);
 }
+
+
+void setup()  
+{
+  Serial.begin(9600);
+  wifiPort.begin(9600);
+  wifiPort.println("AT+RST");
+  delay(1000);
+  wifiPort.println("AT");
+  digitalWrite(3,LOW);
+    digitalWrite(2,LOW);
+  recvCount=0;
+  connectWifi();
+  
+}
+
+void loop() 
+{
+  String str = "";
+  int len,i;
+  
+  wifiPort.listen();
+  delay(500);     //wait 1000ms for all serial data to arrive
+  len = wifiPort.available() ;
+  
+  for(i=0;i<len;i++) {
+    
+    str += char(wifiPort.read());
+   // Serial.println(str);
+  }
+  if(str!="")
+    Serial.println(str);
+    
+    for(flag=0,i=0;i<len;i++)
+    {
+        if(str[i] == ':')
+         {
+         flag=1;
+        continue;
+          }
+      
+      if(flag==1 && str[i] == 't')
+      {
+          toggleLed();
+          Serial.println("t received");
+          recvCount++;
+          break;
+    }
+    
+      if(flag==1 && str[i] == 'p')
+      {
+          playSeq();
+          Serial.println("p received");
+          recvCount++;
+          break;
+    }
+    
+    }
+/*
+  if (Serial.available() ){
+    wifiPort.write(Serial.read());
+  }*/
+   // Serial.flush();
+    wifiPort.flush();
+    
+    if(recvCount>2){
+    resetConn();
+        recvCount=0;
+
+    }
+}
+
