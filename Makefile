@@ -6,4 +6,4 @@ AVR_TOOLS_DIR = /usr/local/CrossPack-AVR/
 MONITOR_PORT  = /dev/ttyACM0
 BOARD_TAG    = uno
 ARDUINO_LIBS = SoftwareSerial
-include Arduino.mk
+include tools/Arduino.mk
