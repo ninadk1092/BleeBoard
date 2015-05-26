@@ -1,3 +1,5 @@
+This file contains files and docs for the hardware
+===
 Correlation is a degree of similarity between two entities, like waveforms, datasets, etc. A high value of correlation means that the two entities being compared are very similar. 
 
 Autocorrelation is comparing an entity with a scaled, compressed, shifted version of itself. 
