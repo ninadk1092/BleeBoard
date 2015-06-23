@@ -19,11 +19,24 @@ The state of the device is obtained by cascading the following 4 status flags
 	*E : Charging 
 	*B : Not Charging/ Battery powered
 */
+//#################### BLEE CODE #########################
 
 char prev_state[4] = “HOAB”;	//ON, Not connected, configured as AP, Not charging
 char cur_state[4] = “HOAX”;
 
-enum {
+//flags
+/*
+Description of flags
+ *debug : if(TRUE) then enable writing debugging statements to software serial port
+ *powersave : if(TRUE) then enable toggling of CH_PD and other battery consuming peripherals
+*/
+
+boolean debug,powersave;
+
+//global variables
+int vbat;
+
+enum mod{
 	POW,
 	CON,
 	AP,
@@ -39,6 +52,22 @@ void loop()
 		updateState();
 	}
 
+	//data received ESP	
+	if(data)
+	{
+		//take necessary actions
+	}
+
+	//activites making changes in state are written here.
+	if(debug)
+	{
+		if(Serial.available())
+		{
+			//read received data and take according actions
+			//if(debug) then print received data to debugSerial port
+		}
+	}
+
 }
 
 void stateChanged()
@@ -46,53 +75,69 @@ void stateChanged()
 	return ~prev_state.equals(cur_state);
 }
 
+
 void updateState()
 {
 switch(state[POW]){
-	case H:		//Device ON
-	//code 
-	//set sysLED color
+	case 'H':		//Device ON
+	//set sysLED white
+	//connection colors override power colors
+	//CH_PD HIGH
+	//powersave = TRUE
 	break;
 	
-	case L:		//Device OFF
-	//code 
+	case 'L':		//Device OFF
 	//sysLED OFF
 	//CH_PD LOW
 	//userLED OFF
+	//powersave = FALSE
 	break;
 }
 
 switch(state[CON]){
-	case C:		//connected
-	//code 
+	
+	//connection colors override power colors
+	
+	case 'C':		//connected
+	//sysLED BLUE stable
+
+	//
 	break;
 	
-	case I:		//connecting
-	//code 
+	case 'I':		//connecting
+	//this case means that some external identity is requesting connection or ring is trying to connect to an AP using the prestored defaults
+	//sysLED BLUE blink twice 200ms intervals, return to white, turn BLUE if connection successful
+	//call connectWifi() and check AP or non AP
 	break;
 
-	case O:	//not connected
-	//code
+	case 'O':		//not connected/disconnected
+	//sysLED white
+	
 	break;
 }
 
 switch(state[AP]){
-	case A:		//Access Point
-	//code 
+	case 'A':		//Access Point
+	//set as access point
+	//return success/failure
+	//write info of new AP to EEPROM
 	break;
 	
-	case N:	//not Access Point
-	//code 
+	case 'N':		//not Access Point
 	break;
 }
 
 switch(state[CHG]){
-	case E:		//Charging
-	//code 
+	case 'E':		//Charging and debugging. While debugging, plug in the USB cable.
+	//sysLED blink Green twice 250ms intervals
+	//sysLED glows red if OFF, green if full charged, white if ON
+	//debug flag = TRUE
 	break;
 	
-	case B:		//Battery powered
-	//code 
+	case 'B':		//Battery powered
 	break;
+
+	default:
+	//monitor Vbat
 }
 
