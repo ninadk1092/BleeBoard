@@ -27,10 +27,21 @@ void motor::open(bool yn)
 	inUse = yn;
 }
 
-void motor::switchOn(bool yn)
+//this shall set the motor direction/speed accordingly
+void motor::open(bool yn, int speed)
 {
-	if (yn)		//start LED
-		mtr_run();
+	if (yn)	
+	{
+		if(speed > lowerLimit){
+			motorIntensity = speed;
+			isOn = true;
+		}
+		else
+		{
+			motorIntensity = 0;
+			isOn = false
+		}
+	}
 	else			//stop LED
 		mtr_stop();
 
@@ -42,21 +53,6 @@ void motor::switchOn(bool yn)
 int motor::getSpeed(void)
 {
 	return motorIntensity;
-}
-
-//this shall set the motor direction/speed accordingly
-void motor::setSpeed(int speed)
-{
-	if(speed > lowerLimit){
-		motorIntensity = speed;
-		isOn = true;
-	}
-	else
-	{
-		motorIntensity = 0;
-		isOn = false
-	}
-		
 }
 
 void motor::setLowerLimit(int lowSpeed)

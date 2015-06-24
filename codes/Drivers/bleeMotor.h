@@ -7,8 +7,7 @@ public:
 	static int motorIntensity = 0;
 
 	static void open(bool);
-	static void switchOn(bool);
-	static void setSpeed(int);
+	static void open(bool, int);
 	static int getSpeed(void);
 	static void setLowerLimit(int);
 };
