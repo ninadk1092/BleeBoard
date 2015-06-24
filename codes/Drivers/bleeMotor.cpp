@@ -1,3 +1,5 @@
+/*change separate functions for setSpeed() and switchOn(), to overloaded functions. */ 
+
 #include "bleeMotor.h"
 
 // to include "x.h"
