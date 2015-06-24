@@ -1,3 +1,5 @@
+/* move blink out of the driver file */
+
 #include "RGB.h"
 // to include x.h
 

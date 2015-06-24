@@ -1,3 +1,7 @@
+/*changes :
+blink() and toggle() functions should not be in the driver. Move them to src.
+*/
+
 #include "LED.h"
 // to include "x.h"
 

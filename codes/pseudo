@@ -52,19 +52,19 @@ void loop()
 		updateState();
 	}
 
+	//activites making changes in state are written here.
+
 	//data received ESP	
 	if(data)
 	{
 		//take necessary actions
 	}
 
-	//activites making changes in state are written here.
 	if(debug)
 	{
 		if(Serial.available())
 		{
-			//read received data and take according actions
-			//if(debug) then print received data to debugSerial port
+			//dump all data from ESP to debugSerial port
 		}
 	}
 
@@ -79,8 +79,12 @@ void stateChanged()
 void updateState()
 {
 switch(state[POW]){
+
+//this state flag is changed by button press
+
 	case 'H':		//Device ON
 	//set sysLED white
+	//call init() ... equivalent to 'void setup()'
 	//connection colors override power colors
 	//CH_PD HIGH
 	//powersave = TRUE
@@ -95,7 +99,12 @@ switch(state[POW]){
 }
 
 switch(state[CON]){
-	
+
+/*this state flag is changed by:
+	*data received from app to connect to an AP (from O to I)
+	*pressing power and user button together (from O to I)
+	*response from ESP, after confirming connection
+*/	
 	//connection colors override power colors
 	
 	case 'C':		//connected
@@ -117,6 +126,9 @@ switch(state[CON]){
 }
 
 switch(state[AP]){
+
+/*this state flag is changed by pressing power and user button together*/
+
 	case 'A':		//Access Point
 	//set as access point
 	//return success/failure
@@ -128,6 +140,9 @@ switch(state[AP]){
 }
 
 switch(state[CHG]){
+
+/*this state flag is changed by plugging in USB cable*/
+
 	case 'E':		//Charging and debugging. While debugging, plug in the USB cable.
 	//sysLED blink Green twice 250ms intervals
 	//sysLED glows red if OFF, green if full charged, white if ON
