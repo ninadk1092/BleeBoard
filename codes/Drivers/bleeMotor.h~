@@ -1,5 +1,4 @@
 #define FULL_INTENSITY 255
-#define MOTOR 1
 
 class motor {
 public:
