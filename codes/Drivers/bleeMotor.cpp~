@@ -38,7 +38,7 @@ void motor::switchOn()
 void motor::switchOn(long delay)
 {
 	motorIntensity = FULL_INTENSITY;
-	bleeDelay(delay, MOTOR);				/*this delay function shall be in "x.h"*/
+	delay(delay, MOTOR);				/*this delay function shall be in "x.h"*/
 }
 
 //this shall set the motor direction/speed accordingly
@@ -69,7 +69,7 @@ void motor::switchOn(int speed, long delay)
 		isOn = false
 	}
 
-	bleeDelay(delay, MOTOR);
+	delay(delay, MOTOR);
 
 	isOn = yn;
 }

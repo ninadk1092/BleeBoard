@@ -1,0 +1,94 @@
+/**	Delay function using Interrupts 	**/
+
+/*
+	Objective:
+		The delay function, when called, should:
+		1) Wait for a certain period of time, ONLY for THAT PARTICULAR peripheral.
+		2) It should, according to the peripheral-ID passed, 
+			execute only the close function of that particular peripheral
+		3) It should spend as little time possible in the ISR and yet fulfil points 1) and 2)
+*/
+
+/*
+	The delay function will have the following arguments:
+		Delay period on a scale of 0 to 255
+		The peripheral number.
+*/
+
+/* Embedded C code. (Please refer ATmega 328 datasheet)*/
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#include <avr/interrupt.h>
+
+#define F_CPU 8000000UL
+
+/*
+Peripheral IDs, these should not be wrtten when driver files are included
+Each driver file has it's own ID written in it
+*/
+#define LED	0
+#define RGB	1
+#define MOTOR	2
+#define ESP-01	3
+
+int PERIPHERAL_ID;
+int c;
+int COUNT;
+void bleeDelay(long, int);
+
+int main(){
+	c = 0;
+        DDRB = (1<<5);
+	PERIPHERAL_ID = LED;
+
+	cli();		//clear all interrupts
+
+	/* initialize timer1, channel A for delay purposes */
+	TCCR1B |= (1<<CS10);	// no prescalar
+	TIMSK1 |= (1<<TOIE1);	// Enable compare interrupt
+        TCNT1 = 0;
+
+	sei();		// initialize interrupts
+        
+        bleeDelay(5, LED);        
+	while(1)
+	{
+	    //Do stuff
+            PORTB = 0xFF;
+            _delay_ms(1000);
+            
+         }
+	return 0;
+}
+
+ISR(TIMER1_OVF_vect)
+{ 
+  if(c == COUNT){
+   PORTB = 0x00;
+   c = 0;
+  }
+  else
+  c++;
+        //Execute the peripheral specific routine
+	switch(PERIPHERAL_ID)
+	{
+		//set cases
+	}
+
+}
+
+void bleeDelay(long delay, int peripheral_ID)
+{
+	COUNT = delay;
+	PERIPHERAL_ID = peripheral_ID;
+        c = 0;
+}
+
+/***/
+
+
+/* Arduino Code */
+
+
