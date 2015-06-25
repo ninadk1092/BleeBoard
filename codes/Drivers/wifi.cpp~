@@ -54,7 +54,7 @@ private void connect()
 	if(state[AP] == 'N')
   	sendData(STMODE);
 	//both code here
-					//code both modes
+	
 	//----------------------------
 
 	//try to Join access points stored in EEPROM, one by one
