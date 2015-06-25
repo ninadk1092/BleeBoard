@@ -34,28 +34,34 @@ void Wifi::open(bool yn)
 
 	Serial.begin(9600);
 	connect();
-	/*if (yn)		//set LED pin
-		LED_asOutput();
-	
-	else			//ddr = 0;
-		LED_asNotOutput();
-
-	inUse = yn;*/
 }
 
 private void connect()
 {
+	int success = 0;
+	char storedaplist[][];
 
-
+	//reset
 	sendData(RST); 	//RST macro is defined in Wifi.h
-//	if(Serial.find("OK"))
-  	Serial.println("reset");
-  	sendData("AT+CWMODE=1\r\n"); 
-  	//sendData("AT+CWJAP=\"\",\"\"\r\n");
+  	if(debug) while(Serial.available()) debugport.println(Serial.read());
+	else if(OK) success++;
+
+	//if debug is enabled, success value will not match. Ignore it.  
+	
+	//set AP, nonAP, both
+	if(state[AP] == 'A')
+  	sendData(APMODE);
+	if(state[AP] == 'N')
+  	sendData(STMODE);
+	//both code here
+	
+	//----------------------------
+
+	//try to Join access points stored in EEPROM, one by one
+	storedaplist = getstoredAPlist();
+	//sendData(); 
   	//Serial.println(sendData("AT+CWJAP=\"AndroidAP\",\"nzzn8521\"\r\n"));
   	sendData("AT+CWJAP=\"AndroidAP\",\"nzzn8521\"\r\n");
-  	delay(7000);
-  	Serial.println("Joined Hotspot");
   	sendData("AT+CIPMUX=1\r\n");
   	sendData("AT+CIPSERVER=1,6000\r\n");
   

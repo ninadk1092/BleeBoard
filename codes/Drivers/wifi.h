@@ -1,4 +1,5 @@
 
+#define OK Serial.find("OK")
 #define RST "AT+RST\r\n"
 #define APMODE "AT+CWMODE=2\r\n"
 #define STMODE "AT+CWMODE=1\r\n"
