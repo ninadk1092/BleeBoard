@@ -1,0 +1,22 @@
+COMPONENT		QUANTITY
+
+Atmega328p TQFP 	1
+ESP8266	ESP-01		1
+MCP73831		1
+22pf 0603		2
+1uf 0603		1
+0.1uf 0603		1
+10k 0603		4
+1k 0603			1
+100 ohm 0603		1
+jumper 2-pin		1
+8MHz 5032		1
+2x3 ISP headers		1
+4x2 ESP headers		1
+RGB LED	1210		1
+Red LED 1206		1
+diode 0603		1
+BC847 			1
+microUSB		1
+push button		1
+vibration button motor	1 
