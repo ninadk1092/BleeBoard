@@ -1,0 +1,12 @@
+/*** PCB layout naming ***/
+
+PCB name is bleeDraft_xyz_a.dip
+where,
+	x: <attempt number> <final / tentative>	eg: 1f
+	y: <number of layers> 	eg: 1l
+	z: <number of decks> 	eg: 3d
+	a: dimensions  [in case a single number is mentioned (eg. n) – PCB is square (nXn)]
+
+so, a layout name would be bleeDraft_1f2l3d_10.dip
+
+/*** Schematic naming and referencing ***/
