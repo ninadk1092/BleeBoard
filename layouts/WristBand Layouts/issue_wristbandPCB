@@ -1,0 +1,28 @@
+Issue:	Battery not charging
+Reason:	Vcc on both sides of PCB was not connected.
+Solution:	Wire jumper placed on Vcc track
+
+---
+
+Issue:	Controller not being powered
+Reason:	Jumper to monitor current was wired on CS [had tracks], but open on TS [no tracks]
+Solution:	Removed copper tracks across 2-pin jumper on CS.
+
+---
+
+Issue:	Button extending beyond board
+Reason:	Foot-print not wide enough
+Solution:	Placed 0.8 X 5 mm surface rectangle tracks, parallel, 5 mm apart
+Comment:	Please check by placing button on printout
+
+---
+
+Issue:	ESP ground disconnect
+Reason:	ESP-01 ground pin on both sides of PCB was not connected.
+Solution:	Wire jumper pulled out seperately for ESP-01 ground pin.
+
+---
+
+Issue:	No room for mounting
+Reason:	PCB fit completely on 30 X 27 mm
+Solution:	Board made 30X30 with 4 mounting holes in each corner
