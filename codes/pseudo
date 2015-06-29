@@ -1,0 +1,158 @@
+//#################### BLEE CODE #########################
+
+/*
+The state of the device is obtained by cascading the following 4 status flags
+1) ON/OFF 
+	*H : ON
+	*L : OFF
+
+2) Connectivity
+	*C : Connected
+	*I : Connecting
+	*O : Not Connected
+
+3) Mode
+	*A : Configured as Access Point
+	*N : Not configured as Access Point
+
+4) Charging 
+	*E : Charging 
+	*B : Not Charging/ Battery powered
+*/
+//#################### BLEE CODE #########################
+
+char prev_state[4] = “HOAB”;	//ON, Not connected, configured as AP, Not charging
+char cur_state[4] = “HOAX”;
+
+//flags
+/*
+Description of flags
+ *debug : if(TRUE) then enable writing debugging statements to software serial port
+ *powersave : if(TRUE) then enable toggling of CH_PD and other battery consuming peripherals
+*/
+
+boolean debug,powersave;
+
+//global variables
+int vbat;
+
+enum mod{
+	POW,
+	CON,
+	AP,
+	CHG
+};
+
+char state[4] = “HONB”
+
+void loop()
+{
+	if(stateChanged())
+	{
+		updateState();
+	}
+
+	//activites making changes in state are written here.
+
+	//data received ESP	
+	if(data)
+	{
+		//take necessary actions
+	}
+
+	if(debug)
+	{
+		if(Serial.available())
+		{
+			//dump all data from ESP to debugSerial port
+		}
+	}
+
+}
+
+void stateChanged()
+{
+	return ~prev_state.equals(cur_state);
+}
+
+
+void updateState()
+{
+switch(state[POW]){
+
+//this state flag is changed by button press
+
+	case 'H':		//Device ON
+	//set sysLED white
+	//call init() ... equivalent to 'void setup()'
+	//connection colors override power colors
+	//CH_PD HIGH
+	//powersave = TRUE
+	break;
+	
+	case 'L':		//Device OFF
+	//sysLED OFF
+	//CH_PD LOW
+	//userLED OFF
+	//powersave = FALSE
+	break;
+}
+
+switch(state[CON]){
+
+/*this state flag is changed by:
+	*data received from app to connect to an AP (from O to I)
+	*pressing power and user button together (from O to I)
+	*response from ESP, after confirming connection
+*/	
+	//connection colors override power colors
+	
+	case 'C':		//connected
+	//sysLED BLUE stable
+
+	//
+	break;
+	
+	case 'I':		//connecting
+	//this case means that some external identity is requesting connection or ring is trying to connect to an AP using the prestored defaults
+	//sysLED BLUE blink twice 200ms intervals, return to white, turn BLUE if connection successful
+	//call connectWifi() and check AP or non AP
+	break;
+
+	case 'O':		//not connected/disconnected
+	//sysLED white
+	
+	break;
+}
+
+switch(state[AP]){
+
+/*this state flag is changed by pressing power and user button together*/
+
+	case 'A':		//Access Point
+	//set as access point
+	//return success/failure
+	//write info of new AP to EEPROM
+	break;
+	
+	case 'N':		//not Access Point
+	break;
+}
+
+switch(state[CHG]){
+
+/*this state flag is changed by plugging in USB cable*/
+
+	case 'E':		//Charging and debugging. While debugging, plug in the USB cable.
+	//sysLED blink Green twice 250ms intervals
+	//sysLED glows red if OFF, green if full charged, white if ON
+	//debug flag = TRUE
+	break;
+	
+	case 'B':		//Battery powered
+	break;
+
+	default:
+	//monitor Vbat
+}
+
