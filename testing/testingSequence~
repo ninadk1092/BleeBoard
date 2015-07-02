@@ -102,8 +102,7 @@ If-Success:
 	Measure the time required for complete charging.
 Errors possible: {contain message synopsis NOT verbatim}
 	Battery does not charge:
-		Check the ground loops.
-		Check prog resistance to be between 2k to 1k.
+		
 
 ---
 
