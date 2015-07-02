@@ -1,0 +1,16 @@
+G04 DipTrace 2.4.0.2*
+%INBottomAssy.gbr*%
+%MOIN*%
+%ADD13C,0.0014*%
+%FSLAX44Y44*%
+G04*
+G70*
+G90*
+G75*
+G01*
+%LNBotAssy*%
+%LPD*%
+X4331Y7087D2*
+D13*
+Y11024D1*
+M02*
