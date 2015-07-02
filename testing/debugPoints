@@ -1,0 +1,42 @@
+Issue:	ESP not getting connected.
+debug:	The 'state' variable which controls the CH_PD pin of the ESP was initialized to LOW.
+	Thus the CH_PD was not enabling the ESP-01 module
+	Thus either the if-decision loop should have a (~state) which would turn CH_PD high.
+	The CH_PD should be initialized to 'HIGH'
+Code:
+	state = HIGH;
+
+	OR
+
+	if(~state){
+		digitalWrite(A2,HIGH); //CH_PD pin, enable ESP
+	}
+	else{
+		digitalWrite(A2,LOW); //CH_PD pin, disable ESP 
+	}
+Tags:	CH_PD, ESP
+
+---
+
+Issue:	ATmega328 not accepting code. No programming possible.
+	If programming is successful, there is a distortion in delay loops
+debug:	The ATmega328 when programmed using Arduino IDE had the following -
+		Board = Arduino UNO
+		Programmer = USBasp
+	Thus the 'boards.txt' file shall have the configuration of 5V and 16MHz
+	Device uses the following -
+		Voltage = 3.3V
+		Crystal = external, 8MHz
+	Thus, a wise choice was to select the following in Arduino IDE
+		Board = Pro Mini (3.3V, 8MHz) w/ ATmega328
+		Programmer = USBasp
+
+Tags: programming, ATmega328
+
+---
+
+Issue:	Arduino generates a warning regarding SCK period when programming.
+debug:	Upload the firmware on USBasp.
+link:	http://www.rogerclark.net/updating-firmware-on-usbasp-bought-from-ebay/
+Tags:	USBasp, programming
+---
