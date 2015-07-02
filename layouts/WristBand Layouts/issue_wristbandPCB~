@@ -23,6 +23,15 @@ Solution:	Wire jumper pulled out seperately for ESP-01 ground pin.
 
 ---
 
-Issue:	ESP ground disconnect
-Reason:	ESP-01 ground pin on both sides of PCB was not connected.
-Solution:	Wire jumper pulled out seperately for ESP-01 ground pin.
+Issue:	No room for mounting
+Reason:	PCB fits completely on 30 X 27 mm leaving no margin at all
+Solution:	Board made 30X30 with 4 mounting holes in each corner
+
+---
+
+Issue:	Arrangement of 'interactive' components
+Reason:	Problems for arranging and clubbing such components together on product case
+Solution:	 Rearrange the components for USB on the bottom side, button on the top side, LED and RGB on the either side
+Comment:	 PCB is now circular in size for design purposes
+
+---
