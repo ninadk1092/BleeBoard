@@ -131,7 +131,6 @@ void charger(){
  charging = ~charging; 
 }
 
-
 int connectWifi(){
      flag = 0;
   
@@ -140,28 +139,53 @@ int connectWifi(){
      delay(200);
   
      Serial.print("AT\r\n");
-     if(Serial.find("OK"))
+     if(Serial.find("OK")){
      flag++;
-   
+     Serial.println("ATok");
+     }
+     
      Serial.print("AT+RST\r\n");
-     if(Serial.find("OK") || Serial.find("ready"))
+     if(Serial.find("OK") || Serial.find("ready")){
      flag++;
+     Serial.println("ATrst");
+     }
   
       Serial.print("AT+CWMODE=1\r\n");
       delay(1000);
       flag++;
   
-      Serial.print("AT+CWJAP=\"AndroidAP\",\"nzzn8521\"\r\n");
-      if(Serial.find("OK"))
-      flag++;
+      Serial.print("AT+CWJAP=\"Garage\",\"Pianist1?\"\r\n");
+      count = 0;
+      
+      while(count < 10){
+        if(Serial.find("OK")){
+        flag++;
+        Serial.println("Join Access Point");
+        break;
+        }
+        else
+        count++;
+      }
+      
     
       Serial.print("AT+CIPMUX=1\r\n");
       delay(500);
       flag++;
 
       Serial.print("AT+CIPSERVER=1,6000\r\n");
-      if(Serial.find("OK"))
-      flag++;
+      count = 0;
+      
+      while(count < 10){
+        if(Serial.find("OK")){
+        flag++;
+        Serial.println("Server");
+        break;
+        }
+        else
+        count++;
+      }
+      
+    
       
       return flag;
 
