@@ -1,0 +1,10 @@
+Saturday 04 July 2015 08:28:21 AM IST 
+
+-1-
+Download ArduinoIDE 1.6.5 or higher - this provides support to communicate with ESP8266 using an Arduino Uno board.
+	Alternatives:
+	s/w: NodeMCU, esptool, ESPlorer - for firmware flashing.
+	h/w:	FTDI convertor board
+
+-2-
+

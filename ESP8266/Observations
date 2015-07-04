@@ -1,0 +1,3 @@
+It seems we need GPIO0 to burn programs. -> so communication with ESP05 is barred as of now.
+
+ESP01 is ok

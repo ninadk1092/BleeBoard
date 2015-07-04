@@ -1,0 +1,9 @@
+Friday 03 July 2015 09:17:39 PM IST
+
+This folder is basically for updates in work to implement ESP8266 as the sole controller. If not so, at least use its modes through Lua.
+
+The plan of action goes as follows:
+
+1) Download the required software. Ping ESP8266
+checksum error tar -xvf name
+2) Download 
