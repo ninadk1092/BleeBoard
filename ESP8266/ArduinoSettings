@@ -1,0 +1,86 @@
+Monday 06 July 2015 11:34:30 PM IST 
+
+- Tools -
+
+System: Linux Ubuntu 15.04 (violet vervet) 64 bit
+Arduino: arduino-1.6.5 IDE
+
+System: HP Pavillion g4
+Arduino: Arduino Uno board rev3 (clone)
+
+---
+
+
+- Arduino IDE 1.6.5 -
+
+The Ubuntu software centre provides Arduino IDE version < 1.6 (1.1.0 actually).
+The ESP8266 generic boards - namely, the ESP-01, ESP-05 etc are supported by Arduino IDE 1.6.3 and above.
+
+---
+
+
+- Download Arduino IDE 1.6.5 -
+
+Link:		https://www.arduino.cc/en/Main/Software
+Issues:		The Linux 64 bit version is a tar.xz file with a erroneous checksum(1).
+Solution:	Download the tar.xz file and execute the following instructions in the terminal:
+
+---
+
+
+- Install Arduino -
+
+Open the terminal <Ctrl + Alt + T>
+cd ~/Downloads
+tar -xvf arduino-1.6.5-linux64.tar.xz
+sudo mv arduino-1.6.5 /opt
+
+check the JAVA environment - Arduino uses the JAVA RXTX for loading the code and for the serial monitor.
+[
+	This results in var/LOCK...ttyACM0 files not getting deleted.
+	In 1.6.5, this has been overcome as Arduino does not use RXTX - one more advantage for using IDE > 1.6.3	
+]
+sudo apt-get install openjdk-7-jre
+{if it already exists, the terminal prints "0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.", else it'll be downloaded}
+
+Now plug in the Arduino Uno board and run the following:
+sudo chmod a+rw /dev/ttyX
+	The X is usually ACM0 = /dev/ttyACM0
+However it is always better to check this.
+Steps to check:
+Do not plug the arduino
+run 'ls /dev/'
+plug the arduino
+run 'ls /dev/'
+check which device has newly appeared - that is ofCourse the Arduino :P
+
+The Arduino has been successfully installed - however - it wont start by simply typing 'arduino' into the terminal.
+This is because the ppa repository only recognises the old arduino (ide-1.1.0) as 'the' arduino IDE.
+So we need to run '/opt/arduino-1.6.5/arduino'. <we could store this path in a variable and thus make it a single command - but whatever!>
+Instead we make a shortcut! >
+cd ~/Desktop
+ln -s /opt/arduino-1.6.5/arduino
+
+Open ‘Files’ program from the launcher
+Go to menu ‘Edit’, ‘Preferences’, tab ‘Behavior’ and set ‘Executable Text Files’ to ‘Ask each time’.
+This will ensure that instead of opening it in gedit, it actually runs the script! - its boring to click run with no 'remember my choice option' so I prefer the path variable - but then again whatever!
+
+---
+
+
+- Configure for ESP modules -
+
+Open ArduinoIDE
+File > Preferences (Ctrl + ,)
+In the space for "Additional Boards Manager URLs" add:
+'http://arduino.esp8266.com/package_esp8266com_index.json'
+We can add multiple links like this: <link1>,<link2>,<link3>...
+
+Tools > Board Manager
+Select the last option 'esp8266 by ESP8266 Community' > install (approx 130MB)
+
+The Arduino is all set to run the Lua and talk directly to ESP8266!! :)
+
+---
+
+- Errors -

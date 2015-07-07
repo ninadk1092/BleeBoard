@@ -1,0 +1,161 @@
+Tuesday 07 July 2015 12:07:44 AM IST 
+
+This document is ONLY about flashing a new firmware into ESP-01
+
+- Testing: Connect -
+
+System:	Arduino UNO rev3
+IDE:	Arduino IDE 1.6.5
+
+Use this script and connection table:
+
+#include<SoftwareSerial.h>
+
+SoftwareSerial esp(10,11);
+
+void setup() {
+
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  esp.begin(9600);
+  
+}
+
+void loop() {
+
+  // put your main code here, to run repeatedly:
+  while(Serial.available()) esp.write(Serial.read());
+  while(esp.available()) Serial.write(esp.read());
+
+}
+
+connections:
+DC jack +ve	==>	LM1117 Vin
+DC jack -ve	==>	LM1117 GND
+Arduino GND	==>	LM1117 GND
+ESP-01 GND	==>	Arduino GND
+-- Made a complete ground loop --
+ESP-01 Vcc	==>	LM1117 Vout (3.3V)
+ESP-01 CH_PD	==>	LM1117 Vout (3.3V)
+-- Supply and ESP enable done --
+
+Testing:
+URXD	==>	Arduino TX (pin 11)
+UTXD	==>	Arduino RX (pin 10)
+
+Burning:	(Remove the ATmega328) (...1)
+URXD	==> Arduino Rx
+UTXD	==> Arduino Tx
+
+NOTE!!
+Do not connect the ESP module RX-TX pins while burning the code into the Arduino while testing if CH_PD is already powered.
+
+Being Careless :P
+The arduino rx-tx provide signals of 5V while the ESP is powered at 3.3V. There is a strong possibility that this may fry the ESP-01 module. However, for me, it functioned perfectly the whole time - so didn't bother, but it is recommended to step down the Rx-Tx channel voltage by the following connections.
+Arduino RX				==>	NPN transistor base (B, BC547)
+3.3 V (ESP-Vcc)				==>	NPN transistor collector (C, BC547)
+GND (ESP-GND)				==>	Terminal 1 Resistor 10K
+NPN transistor emitter (E, BC547)	==>	Terminal 2 Resistor 10K
+ESP (UTXD)				==>	NPN transistor emitter (E, BC547)
+Similiar connections for TX of arduino.
+
+---
+
+
+- Testing: Commands -
+
+Burn the above code in arduino with CH_PD grounded
+Open the serial terminal of Arduino IDE
+Make CH_PD high >> thus the module is enabled
+The serial terminal window (henceforth called sw), will display the vendor details.
+	The sw should be set to 9600 baud-rate
+	Select both mode CH + NL 
+
+check if connection is established:
+send AT
+ESP answers OK
+We can send any AT command as in the document attached.
+
+---
+
+
+- Firmware -
+
+Change connections of Rx-Tx as per point(...1)
+Thus the hardware is ready, so now we need a flasher :P >D
+	The best one - though still under-construction - is the esptool
+	go to 'https://github.com/themadinventor/esptool/' and clone the repo
+			git clone https://github.com/themadinventor/esptool.git
+
+Now because we are using Arduino, we have to make a few changes in the esptool.py file.
+
+BUT before that we have to check on our python installation.
+We need something around python 2.7 - no, it will not work for >=3. I have python 2.7.9
+We need to install pyserial module.
+	sudo apt-get install python-serial
+We also have to install setuptools in python.
+	sudo apt-get install python-setuptools
+Then if we want esptool to run everywhere we have to run the setup.py
+	sudo python setup.py install
+
+Now, to open the esptool.py code
+	Change the ttyUSB0 to ttyACM0 - because we are using the FTDI on Arduino
+	Change the values of the RAM and FLASH blocks as follows:
+		# Maximum block sized for RAM and Flash writes, respectively.
+	    	ESP_RAM_BLOCK   = 0x180
+	    	ESP_FLASH_BLOCK = 0x40
+
+NOTE!!! Remove the ATmega328P from the Arduino Board!
+
+Download the nodemcu_latest firmware version - a bin file
+open the terminal and run this
+cd ~/esptool
+./esptool.py write_flash 0x000000 nodemcu_latest.bin
+
+The ESP-01 module has a new firmware!! (Actually nodemcu is a tiny OS)
+
+---
+
+
+- Test the new firmware -
+
+	Revert the hardware changes to testing.
+	Plug back the ATmega328P
+	Remove the RX-TX and burn the code written above
+
+Open the sw:
+We shall see:
+	NodeMCU 0.9.6 build 20150216 powered by Lua 5.1.4
+	lua: cannot open init.lua
+
+Now in the send box write:
+	tradition = 'Hello World'
+it'll get echoed in the sw
+write
+	print(tradition)
+it'll print Hello World
+So much like a Python interface!!!
+
+---
+
+- cannot open init.lua -
+
+This particular line whenever we start the ESP communication gives this feeling that firmware is not well installed.
+But this is not so.
+The error is solely because this file does not exist!
+init.lua of ESP is the 'void setup()' of Arduino.
+So, to just make it better we do the following
+	file.open("init.lua","w+")
+	file.writeline([[print("start here")]])
+	file.close() 
+
+Now whenever the ESP communication begins we'll see:
+	NodeMCU 0.9.6 build 20150216 powered by Lua 5.1.4
+	start here
+
+Writing actual lua code and ESPlorer is in LuaTrials
+
+---
+
+
+- Errors -

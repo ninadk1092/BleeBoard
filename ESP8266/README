@@ -2,8 +2,10 @@ Friday 03 July 2015 09:17:39 PM IST
 
 This folder is basically for updates in work to implement ESP8266 as the sole controller. If not so, at least use its modes through Lua.
 
-The plan of action goes as follows:
+Reading Order:
 
-1) Download the required software. Ping ESP8266
-checksum error tar -xvf name
-2) Download 
+1) ArduinoSettings
+2) ESPFirmware
+3) Better Idea would be to surf the links in References (But we can jump directly to (4))
+4) LuaTrials
+5) SidetrackingATmega328
