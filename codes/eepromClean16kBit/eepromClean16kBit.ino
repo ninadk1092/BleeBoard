@@ -9,8 +9,8 @@
 #include <Wire.h>         //http://arduino.cc/en/Reference/Wire
 
 
-const uint32_t totalKBytes = 2;         //for read and write test functions
-extEEPROM eep(kbits_16, 1, 16);         //device size, number of devices, page size
+const uint32_t totalKBytes = 32;         //for read and write test functions
+extEEPROM eep(kbits_256, 1, 64);         //device size, number of devices, page size
 
 
 
@@ -25,8 +25,8 @@ void setup(void)
     }
     
    
-    uint8_t chunkSize = 4;    //this can be changed, but must be a multiple of 4 since we're writing 32-bit integers
-   eeErase(chunkSize, 0, totalKBytes * 1024 - 1);
+    uint8_t chunkSize = 16;    //this can be changed, but must be a multiple of 4 since we're writing 32-bit integers
+    eeErase(chunkSize, 0, totalKBytes * 1024 - 1);
     Serial.println("Write chunk");
     eeWrite(chunkSize);
     Serial.println("Read chunk");
