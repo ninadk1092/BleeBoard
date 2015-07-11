@@ -1,0 +1,11 @@
+Friday 03 July 2015 09:17:39 PM IST
+
+This folder is basically for updates in work to implement ESP8266 as the sole controller. If not so, at least use its modes through Lua.
+
+Reading Order:
+
+1) ArduinoSettings
+2) ESPFirmware
+3) Better Idea would be to surf the links in References (But we can jump directly to (4))
+4) LuaTrials
+5) SidetrackingATmega328
