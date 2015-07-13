@@ -1,0 +1,24 @@
+Use OrCAD 
+
+//
+ribbon cables
+esp random
+pcb 17.5 R
+
+
+//
+0.55 motor dia
+motor pin pitch
+
+clear battery 
+
+//
+switch dim -- 
+
+//
+Diode SMA
+
+//mcp khalun kahi nahi
+
+//
+BC547 thick tracks

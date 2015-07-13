@@ -1,0 +1,255 @@
+node module
+
+    node.restart()
+    node.dsleep()
+    node.info()
+    node.chipid()
+    node.flashid()
+    node.heap()
+    node.key() --deprecated
+    node.led() --deprecated
+    node.input()
+    node.output()
+    node.readvdd33() --deprecated, moved to adc.readvdd33()
+    node.compile()
+    node.setcpufreq()
+    node.restore() --Added on 07/04/2015
+
+file module
+
+    file.remove()
+    file.open()
+    file.close()
+    file.readline()
+    file.writeline()
+    file.read()
+    file.write()
+    file.flush()
+    file.seek()
+    file.list()
+    file.format()
+    file.rename()
+    file.fsinfo()
+
+wifi module
+
+    wifi.setmode()
+    wifi.getmode()
+    wifi.getchannel() --Added on 06/16/2015
+    wifi.setphymode() --Added on 06/16/2015
+    wifi.getphymode() --Added on 06/16/2015
+    wifi.startsmart()
+    wifi.stopsmart()
+    wifi.sleeptype()
+
+wifi.sta sub-module
+
+    wifi.sta.getconfig() --Added on 06/16/2015
+    wifi.sta.config() --Updated on 06/16/2015
+    wifi.sta.connect()
+    wifi.sta.disconnect()
+    wifi.sta.autoconnect()
+    wifi.sta.getip()
+    wifi.sta.setip()
+    wifi.sta.getmac() --Updated on 06/16/2015
+    wifi.sta.setmac() --Updated on 06/16/2015
+    wifi.sta.getap() --Updated on 06/16/2015
+    wifi.sta.status()
+    wifi.sta.getbroadcast()
+
+wifi.ap sub-module
+
+    wifi.ap.config()
+    wifi.ap.getip()
+    wifi.ap.setip()
+    wifi.ap.getmac()
+    wifi.ap.setmac() --Updated on 06/16/2015
+    wifi.ap.getbroadcast()
+
+timer module
+
+    tmr.delay()
+    tmr.now()
+    tmr.alarm()
+    tmr.stop()
+    tmr.wdclr()
+    tmr.time()
+
+gpio module
+
+    gpio.mode()
+    gpio.read()
+    gpio.write()
+    gpio.trig()
+
+pwm module
+
+    pwm.setup()
+    pwm.close()
+    pwm.start()
+    pwm.stop()
+    pwm.setclock()
+    pwm.getclock()
+    pwm.setduty()
+    pwm.getduty()
+
+net module
+
+    net.createServer()
+    net.createConnection()
+
+net.server sub-module
+
+    net.server:listen()
+    net.server:close()
+
+net.socket sub-module
+
+    net.socket:connect()
+    net.socket:send()
+    net.socket:on()
+    net.socket:close()
+    net.socket:dns()
+
+i2c module
+
+    i2c.setup()
+    i2c.start()
+    i2c.stop()
+    i2c.address()
+    i2c.write()
+    i2c.read()
+
+adc module
+
+    adc.read()
+    adc.readvdd33()
+
+uart module
+
+    uart.setup()
+    uart.on()
+    uart.write()
+
+1-wire module
+
+    ow.setup()
+    ow.reset()
+    ow.skip()
+    ow.select()
+    ow.write()
+    ow.write_bytes()
+    ow.read()
+    ow.read_bytes()
+    ow.depower()
+    ow.reset_search()
+    ow.target_search()
+    ow.search()
+    ow.crc8()
+    ow.check_crc16()
+    ow.crc16()
+
+bit module
+
+    bit.bnot()
+    bit.band()
+    bit.bor()
+    bit.bxor()
+    bit.lshift()
+    bit.rshift()
+    bit.arshift()
+    bit.bit()
+    bit.set()
+    bit.clear()
+    bit.isset()
+    bit.isclear()
+
+spi module
+
+    spi.setup()
+    spi.send()
+    spi.recv()
+
+mqtt module
+
+    mqtt.Client()
+
+mqtt.client sub-module
+
+    mqtt.client:lwt()
+    mqtt.client:connect()
+    mqtt.client:close()
+    mqtt.client:publish()
+    mqtt.client:subscribe()
+    mqtt.client:on()
+
+WS2812 module
+
+    ws2812.writergb()
+
+cjson module
+
+    cjson.encode()
+    cjson.decode()
+
+crypto module
+
+    crypto.hash()
+    crypto.hmac()
+    crypto.mask()
+    crypto.toHex()
+    crypto.toBase64()
+
+u8g module
+
+    u8g.ssd1306_128x64_i2c()
+    u8g.ssd1306_128x64_spi()
+    u8g.pcd8544_84x48()
+
+u8g.disp sub-module
+
+    u8g.disp:begin()
+    u8g.disp:drawBitmap()
+    u8g.disp:drawBox()
+    u8g.disp:drawCircle()
+    u8g.disp:drawDisc()
+    u8g.disp:drawEllipse()
+    u8g.disp:drawFilledEllipse()
+    u8g.disp:drawFrame()
+    u8g.disp:drawHLine()
+    u8g.disp:drawLine()
+    u8g.disp:drawPixel()
+    u8g.disp:drawRBox()
+    u8g.disp:drawRFrame()
+    u8g.disp:drawStr()
+    u8g.disp:drawStr90()
+    u8g.disp:drawStr180()
+    u8g.disp:drawStr270()
+    u8g.disp:drawTriangle()
+    u8g.disp:drawVLine()
+    u8g.disp:drawXBM()
+    u8g.disp:firstPage()
+    u8g.disp:getColorIndex()
+    u8g.disp:getFontAscent()
+    u8g.disp:getFontDescent()
+    u8g.disp:getFontLineSpacing()
+    u8g.disp:getHeight()
+    u8g.disp:getMode()
+    u8g.disp:getWidth()
+    u8g.disp:getStrWidth()
+    u8g.disp:nextPage()
+    u8g.disp:setColorIndex()
+    u8g.disp:setDefaultBackgroundColor()
+    u8g.disp:setDefaultForegroundColor()
+    u8g.disp:setFont()
+    u8g.disp:setFontLineSpacingFactor()
+    u8g.disp:setFontPosBaseline()
+    u8g.disp:setFontPosBottom()
+    u8g.disp:s
+
+dht module
+
+    dht.read()
+    dht.read11()
+    dht.readxx()
+

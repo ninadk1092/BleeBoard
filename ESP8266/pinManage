@@ -1,0 +1,19 @@
+Peripherals		Requirement			Pin Ref.	Assigned Pin
+---			---				---		---
+Button			1 GPIO input			ButtonIn	GPIO 4
+Red LED			1 GPIO output			RedOut		GPIO 5
+RGB LED			3 PWM channels (@ max)		R		PWM - GPIO 13	Dominant colour
+							G		PWM - GPIO 12 	
+							B		PWM - GPIO 14 	(Weakest Color - no PWM perhaps)
+Motor			1 PWM channel (essential)	MotorIn		PWM - GPIO 15
+Charging Indicator	1 GPIO input			V-USBin		ADC
+Programmming/ Debug	1 USART peripheral (2)		Rx		URXD
+							Tx		UTXD
+External Memory		1 TWI peripheral (2)		SCL		GPIO0 / SCL
+							SDA		GPIO2 / SDA
+Extra			-				-		GPIO 16
+
+Total:							10 (+1) pins
+
+Notes:
+All GPIO except GPIO16 are PWM channels

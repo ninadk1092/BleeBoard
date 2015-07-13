@@ -1,0 +1,19 @@
+w@JARVIS:~$ sudo apt-get install nodejs-legacy 
+w@JARVIS:~$ sudo add-apt-repository ppa:chris-lea/node.js
+w@JARVIS:~$ npm install serialport
+w@JARVIS:~$ sudo !!
+sudo npm install serialport
+-
+> serialport@1.7.4 install /home/w/node_modules/serialport
+> node-pre-gyp install --fallback-to-build
+w@JARVIS:~$ sudo npm install -g esp8266
+\
+> serialport@1.7.4 install /usr/local/lib/node_modules/esp8266/node_modules/serialport
+> node-pre-gyp install --fallback-to-build
+
+w@JARVIS:~$ sudo npm install  -g serialport
+w@JARVIS:~$ esp
+Serial port not configured.
+Please use "esp port set <port_address>" to configure.
+w@JARVIS:~$ 
+

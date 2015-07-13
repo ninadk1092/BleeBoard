@@ -4,3 +4,54 @@ System:	Arduino UNO rev3
 IDE:	Arduino IDE 1.6.5
 	(alternative) = ESPlorer
 
+---
+
+
+- Installing NodeJS -
+
+sudo apt-get install nodejs-legacy 
+
+sudo add-apt-repository ppa:chris-lea/node.js
+
+npm install serialport
+
+sudo !!
+sudo npm install serialport
+-
+> serialport@1.7.4 install /home/w/node_modules/serialport
+> node-pre-gyp install --fallback-to-build
+
+sudo npm install -g esp8266
+\
+> serialport@1.7.4 install /usr/local/lib/node_modules/esp8266/node_modules/serialport
+> node-pre-gyp install --fallback-to-build
+
+sudo npm install  -g serialport
+
+---
+
+
+- Pushing code to ESP-01 -
+	- Connections -
+	As stated in ESPFirmware file
+
+	- Execution -
+w@JARVIS:~$ sudo esp port set /dev/ttyACM0
+
+w@JARVIS:~$ esp file write blink.lua
+Aborted (core dumped)
+
+w@JARVIS:~$ esp file list
+      21 bytes  init.lua
+     420 bytes  blink.lua
+Aborted (core dumped)
+
+w@JARVIS:~$ esp file execute blink.lua
+Aborted (core dumped)
+
+---
+
+- Issues -
+
+1) The delay generated does not work accordingly
+2) Loop execution 
