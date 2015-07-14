@@ -1,0 +1,31 @@
+Rx	-	RX
+Tx	-	TX
+RST	-	RST
+
+For programming: Just one jumper between RST and GND
+RST grounded when jumper is plugged
+Else High
+---
+
+Programmer:	ArduinoISP
+Board:		Arduino Uno
+IDE/ Tool:	Arduino-1.6.5
+
+--- Conditions: 5V 16MHz ---
+
+Issue: Burning Bootloader.
+The bootloader cannot be burned in the same configuration.
+If programmer == AVR ISP
+stk500 sync error reported (10 trials)
+
+Suggested:
+
+
+Debug:	Take a clean ATmega and burn bootloader
+	Take a clean ATmega and burn code
+
+Proceed:	Use ESP to transfer code
+
+Observations:	Code gets uploaded with bootloader already present.
+
+In Case we want to install a bootloader we need to use SPI
